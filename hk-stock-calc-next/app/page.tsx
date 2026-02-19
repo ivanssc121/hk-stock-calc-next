@@ -156,7 +156,7 @@ export default function Home() {
     setFeeDetails(fees);
     setLatestCostPrice(tradeMode === 'buy' && shares > 0 ? cost / shares : 0);
 
-    if (tradeMode === 'buy' && currentPrice > 0) {
+    if (tradeMode === 'buy' && Number(currentPrice) > 0) {
       const sellAmount = shares * Number(currentPrice);
       const sellCommission = Math.max(sellAmount * commissionRate, minCommission);
       const sellStampDuty = Math.ceil(sellAmount * 0.001);
