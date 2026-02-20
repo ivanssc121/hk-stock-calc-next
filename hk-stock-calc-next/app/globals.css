@@ -24,3 +24,24 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* 確保 main 填滿 */
+main {
+  min-height: 100vh;
+  background-color: #f8fafc !important;
+}
+
+/* 字體清晰度最高 */
+* {
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+}
+
+/* 防手機 dark mode 強制黑底 */
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-color: #f8fafc !important;
+    color: #111827 !important;
+  }
+}

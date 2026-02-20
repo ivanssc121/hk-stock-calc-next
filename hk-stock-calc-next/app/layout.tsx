@@ -18,9 +18,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-HK">
-      <body className={`${inter.className} bg-zinc-50`}>
+      <head>
+        {/* 解決手機黑邊 + 安全區 + dark mode */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no" />
+        <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: dark)" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+      </head>
+      <body className={`${inter.className} bg-zinc-50 antialiased min-h-screen`}>
         <SideMenu />
-        <main className="md:ml-64 p-4">{children}</main>
+        <main className="md:ml-64 p-4 min-h-screen">{children}</main>
       </body>
     </html>
   );
