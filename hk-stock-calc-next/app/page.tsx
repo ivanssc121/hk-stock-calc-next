@@ -8,8 +8,8 @@ export default function Home() {
   const [stockSymbol, setStockSymbol] = useState('');
   const [stockName, setStockName] = useState('');
   const [price, setPrice] = useState<number | ''>(''); // 買入股價，手動
-  const [lotSize, setLotSize] = useState(100);
-  const [lots, setLots] = useState(1);
+  const [lotSize, setLotSize] = useState<number | ''>(100);
+  const [lots, setLots] = useState<number | ''>(1);
   const [currentPrice, setCurrentPrice] = useState<number | ''>(''); // 現在股價，API 後自動
   const [calculated, setCalculated] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -289,11 +289,17 @@ export default function Home() {
             <div>
               <label className="block text-sm font-medium text-zinc-700 mb-2">每手股數</label>
               <input
-                type="number"
-                min="1"
+                type="text"                  // 改成 text
+                inputMode="numeric"          // 手機顯示數字鍵盤
+                pattern="[0-9]*"             // 只允許數字
                 value={lotSize}
-                onChange={(e) => setLotSize(Number(e.target.value) || 100)}
-                className="w-full px-5 py-4 border border-zinc-300 rounded-xl text-lg focus:border-emerald-500 focus:ring-emerald-500"
+                onChange={(e) => {
+                  const val = e.target.value;
+                  if (val === '' || /^\d+$/.test(val)) {
+                    setLotSize(val === '' ? '' : Number(val));
+                  }
+                }}
+                className="w-full px-4 py-3 border border-zinc-300 rounded-xl text-base focus:border-emerald-500 focus:ring-emerald-500"
                 placeholder="例如 100"
               />
             </div>
@@ -303,11 +309,17 @@ export default function Home() {
                 {tradeMode === 'buy' ? '買入手數' : '賣出手數'} (lots)
               </label>
               <input
-                type="number"
-                min="1"
+                type="text"                  // 改成 text
+                inputMode="numeric"
+                pattern="[0-9]*"
                 value={lots}
-                onChange={(e) => setLots(Number(e.target.value) || 1)}
-                className="w-full px-5 py-4 border border-zinc-300 rounded-xl text-lg focus:border-emerald-500 focus:ring-emerald-500"
+                onChange={(e) => {
+                  const val = e.target.value;
+                  if (val === '' || /^\d+$/.test(val)) {
+                    setLots(val === '' ? '' : Number(val));
+                  }
+                }}
+                className="w-full px-4 py-3 border border-zinc-300 rounded-xl text-base focus:border-emerald-500 focus:ring-emerald-500"
                 placeholder="例如 1 手"
               />
             </div>
@@ -363,7 +375,9 @@ export default function Home() {
         <div className="bg-white rounded-3xl shadow-xl overflow-hidden mb-8">
           <div className="bg-emerald-700 text-white px-8 py-6 flex justify-between items-center">
             <h2 className="text-2xl font-bold">
-              {bank === 'scb' ? '渣打' : bank === 'hsbc' ? '滙豐' : '中銀'} • {stockName || fullStockCode || '股票'} {tradeMode === 'buy' ? '買入' : '賣出'}
+              <p className='text-lg'>{bank === 'scb' ? '渣打' : bank === 'hsbc' ? '滙豐' : '中銀'} •</p> 
+              <p className='text-lg'>{stockName || fullStockCode || '股票'}</p>
+              <p className='text-lg'>{tradeMode === 'buy' ? '買入' : '賣出'}</p>
             </h2>
             <button
               onClick={() => setCalculated(false)}
@@ -383,7 +397,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="text-sm text-emerald-800">{tradeMode === 'buy' ? '交易金額' : '賣出金額'}</p>
-                    <p className="text-3xl font-bold text-emerald-900">
+                    <p className="text-2xl font-bold text-emerald-900">
                       HK$ {tradeAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </p>
                   </div>
@@ -393,7 +407,7 @@ export default function Home() {
                   <p className="text-xl font-bold text-emerald-700">
                     {tradeMode === 'buy' ? '總開支' : '扣除費用後淨收款'}
                   </p>
-                  <p className="text-5xl font-extrabold text-emerald-800 mt-2">
+                  <p className="text-4xl font-extrabold text-emerald-800 mt-2">
                     HK$ {totalCost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   </p>
                 </div>
