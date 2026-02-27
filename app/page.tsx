@@ -185,10 +185,10 @@ export default function Home() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 bg-zinc-50 min-h-screen">
-      <div className="text-center mb-10">
+      {/* <div className="text-center mb-10">
         <h1 className="text-4xl font-bold text-emerald-700">港股費用計算器</h1>
         <p className="text-zinc-600 mt-2">Yahoo API 版 • server-side fetch • 無 CORS</p>
-      </div>
+      </div> */}
 
       {/* 輸入區 */}
       <div className="bg-white rounded-3xl shadow-xl overflow-hidden mb-8">

@@ -28,7 +28,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} bg-zinc-50 antialiased min-h-screen`}>
         <SideMenu />
-        <main className="md:ml-64 p-4 min-h-screen">{children}</main>
+        <main className="p-4 pt-16 min-h-screen">{children}</main>
       </body>
     </html>
   );
