@@ -7,10 +7,10 @@ export default function Home() {
   const [tradeMode, setTradeMode] = useState<'buy' | 'sell'>('buy');
   const [stockSymbol, setStockSymbol] = useState('');
   const [stockName, setStockName] = useState('');
-  const [price, setPrice] = useState<number | ''>(''); // 買入股價，手動
+  const [price, setPrice] = useState<number | ''>('');
   const [lotSize, setLotSize] = useState<number | ''>(100);
   const [lots, setLots] = useState<number | ''>(1);
-  const [currentPrice, setCurrentPrice] = useState<number | ''>(''); // 現在股價，API 後自動
+  const [currentPrice, setCurrentPrice] = useState<number | ''>('');
   const [calculated, setCalculated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
